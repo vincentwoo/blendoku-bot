@@ -71,32 +71,12 @@ pre {
   overflow-x: auto;
 }
 
-table {
-  width:100%;
-  border-collapse:collapse;
-}
-
-th, td {
-  text-align:left;
-  padding:5px 10px;
-  border-bottom:1px solid #e5e5e5;
-}
-
-dt {
-  color:#444;
-  font-weight:700;
-}
-
-th {
-  color:#444;
-}
-
 img {
   max-width:100%;
 }
 
 aside {
-  width:270px;
+  width:300px;
   float:left;
   clear: both;
 }
@@ -123,7 +103,7 @@ header ul a strong {
 }
 
 section {
-  width:500px;
+  width:470px;
   float:right;
   padding-bottom:50px;
 }
@@ -144,4 +124,14 @@ footer {
   float:left;
   position:fixed;
   bottom:50px;
+}
+
+table {
+  border-collapse:collapse;
+}
+
+aside td {
+  width:  30px;
+  height: 30px;
+  border: 1px solid #eee;
 }
