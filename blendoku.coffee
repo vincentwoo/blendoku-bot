@@ -22,9 +22,8 @@ class Blendoku
     for row in @grid
       rowEl = $('<tr/>')
       for cell in row
-        console.log cell
         cellEl = $("<td style=\"background: ##{cell}\"></td>")
-        cellEl.css('border', 0) if cell == null
+        cellEl.css('border', 0) if cell == null || typeof cell == 'string'
         rowEl.append cellEl
       el.prepend rowEl
     el

@@ -40,9 +40,8 @@ Blendoku = (function() {
       rowEl = $('<tr/>');
       for (_j = 0, _len2 = row.length; _j < _len2; _j++) {
         cell = row[_j];
-        console.log(cell);
         cellEl = $("<td style=\"background: #" + cell + "\"></td>");
-        if (cell === null) cellEl.css('border', 0);
+        if (cell === null || typeof cell === 'string') cellEl.css('border', 0);
         rowEl.append(cellEl);
       }
       el.prepend(rowEl);
