@@ -49,6 +49,23 @@ Blendoku = (function() {
     return this.grid[row][col].color = color;
   };
 
+  Blendoku.prototype.reset = function() {
+    var cell, color, row, _i, _j, _len, _len2, _ref;
+    this.palette = [];
+    _ref = this.grid;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      row = _ref[_i];
+      for (_j = 0, _len2 = row.length; _j < _len2; _j++) {
+        cell = row[_j];
+        if (!cell || cell.locked) continue;
+        color = cell.color;
+        cell.color = null;
+        this.palette.push(color);
+      }
+    }
+    return this.palette = _.shuffle(this.palette);
+  };
+
   Blendoku.prototype.render = function() {
     return $(_.template(this.constructor.TEMPLATE, {
       grid: this.grid,
@@ -75,7 +92,20 @@ solution = [['8c86a4', 0, 1], ['73758c', 0, 2], ['5a6973', 0, 3], ['425952', 0, 
 
 nextStep = function(idx) {
   var move, replace;
-  if (idx === solution.length) return;
+  if (idx === solution.length) {
+    setTimeout(function() {
+      var replace;
+      example1.reset();
+      replace = example1.render();
+      el.replaceWith(replace);
+      el = replace;
+      return $('#example-1').prepend(el);
+    }, 3000);
+    setTimeout(function() {
+      return nextStep(0);
+    }, 5000);
+    return;
+  }
   move = solution[idx];
   example1.set(move[0], move[1], move[2]);
   replace = example1.render();

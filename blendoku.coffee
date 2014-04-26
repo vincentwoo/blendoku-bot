@@ -71,6 +71,16 @@ class Blendoku
     @palette[_.indexOf @palette, color] = null
     @grid[row][col].color = color
 
+  reset: ->
+    @palette = []
+    for row in @grid
+      for cell in row
+        continue if !cell || cell.locked
+        color = cell.color
+        cell.color = null
+        @palette.push color
+    @palette = _.shuffle @palette
+
   render: ->
     $(_.template(@constructor.TEMPLATE, {@grid, @palette}))
 
@@ -118,7 +128,18 @@ solution = [
 ]
 
 nextStep = (idx) ->
-  return if idx == solution.length
+  if idx == solution.length
+    setTimeout ->
+      example1.reset()
+      replace = example1.render()
+      el.replaceWith replace
+      el = replace
+      $('#example-1').prepend el
+    , 3000
+    setTimeout ->
+      nextStep 0
+    , 5000
+    return
 
   move = solution[idx]
   example1.set move[0], move[1], move[2]
