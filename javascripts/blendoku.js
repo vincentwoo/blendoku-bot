@@ -86,4 +86,6 @@ nextStep = function(idx) {
   }, 750);
 };
 
-nextStep(0);
+setTimeout(function() {
+  return nextStep(0);
+}, 2000);

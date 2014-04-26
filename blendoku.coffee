@@ -130,4 +130,6 @@ nextStep = (idx) ->
     nextStep idx + 1
   , 750
 
-nextStep 0
+setTimeout ->
+  nextStep 0
+, 2000
