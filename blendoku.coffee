@@ -20,7 +20,11 @@ class Blendoku
         <% _.eachSlice(palette, 7, function(row) { %>
           <tr>
             <% _.each(row, function(color) { %>
-              <td style="background: #<%= color %>"></td>
+              <% if (color) { %>
+                <td style="background: #<%= color %>"></td>
+              <% } else { %>
+                <td><span class="placeholder"></span></td>
+              <% } %>
             <% }); %>
           </tr>
         <% }); %>
@@ -63,8 +67,11 @@ class Blendoku
         color: null
         locked: false
 
+  set: (color, row, col) ->
+    @palette[_.indexOf @palette, color] = null
+    @grid[row][col].color = color
+
   render: ->
-    console.log @grid
     $(_.template(@constructor.TEMPLATE, {@grid, @palette}))
 
 example1 = new Blendoku
@@ -91,30 +98,36 @@ example1 = new Blendoku
   palette: ['8c9e42', 'c5be84', '9c9e84', '8c926b', 'a4aa63', 'b5a6a4', '5a6973', '8c86a4', '425952', '73758c', '103d21', '73864a', '294d3a', 'd6db5b']
 
 el = example1.render()
-
 $('#example-1').prepend el
 
-# setInterval ->
-#   replace = example1.render()
-#   el.replaceWith replace
-#   el = replace
-# , 200
+solution = [
+  ['8c86a4', 0, 1]
+  ['73758c', 0, 2]
+  ['5a6973', 0, 3]
+  ['425952', 0, 4]
+  ['294d3a', 0, 5]
+  ['103d21', 0, 6]
+  ['73864a', 1, 4]
+  ['8c926b', 1, 3]
+  ['9c9e84', 1, 2]
+  ['b5a6a4', 1, 1]
+  ['d6db5b', 3, 3]
+  ['a4aa63', 2, 3]
+  ['c5be84', 2, 2]
+  ['8c9e42', 2, 4]
+]
 
-###
-[0, 0, 'a492c5']
-[0, 1, '8c86a4']
-[0, 2, '73758c']
-[0, 3, '5a6973']
-[0, 4, '425952']
-[0, 5, '294d3a']
-[0, 6, '103d21']
-[1, 1, 'b5a6a4']
-[1, 2, '9c9e84']
-[1, 3, '8c926b']
-[1, 4, '73864a']
-[1, 5, '4a6931']
-[2, 2, 'c5be84']
-[2, 3, 'a4aa63']
-[2, 4, '8c9e42']
-[3, 3, 'd6db5b']
-###
+nextStep = (idx) ->
+  return if idx == solution.length
+
+  move = solution[idx]
+  example1.set move[0], move[1], move[2]
+  replace = example1.render()
+  el.replaceWith replace
+  el = replace
+
+  setTimeout ->
+    nextStep idx + 1
+  , 750
+
+nextStep 0

@@ -318,4 +318,14 @@ td .fui-lock {
 
 .palette td {
   border: 0;
+  text-align: center;
+  vertical-align: center;
+}
+
+.palette td .placeholder {
+  width:  10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 4px;
+  display: inline-block;
 }
