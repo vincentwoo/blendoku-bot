@@ -2,7 +2,7 @@
 God help ye, all who enter. We write better code than this, generally.
 Checkout the github for the original coffeescript source.
 */
-var Blendoku, el, example1, nextStep, solution;
+var Blendoku, example1, nextStep, solution;
 
 _.mixin({
   eachSlice: function(obj, size, iterator, context) {
@@ -67,10 +67,13 @@ Blendoku = (function() {
   };
 
   Blendoku.prototype.render = function() {
-    return $(_.template(this.constructor.TEMPLATE, {
+    var replace;
+    replace = $(_.template(this.constructor.TEMPLATE, {
       grid: this.grid,
       palette: this.palette
     }));
+    if (this.$el) this.$el.replaceWith(replace);
+    return this.$el = replace;
   };
 
   return Blendoku;
@@ -84,38 +87,27 @@ example1 = new Blendoku({
   palette: ['8c9e42', 'c5be84', '9c9e84', '8c926b', 'a4aa63', 'b5a6a4', '5a6973', '8c86a4', '425952', '73758c', '103d21', '73864a', '294d3a', 'd6db5b']
 });
 
-el = example1.render();
-
-$('#example-1').prepend(el);
+$('#example-1').prepend(example1.render());
 
 solution = [['8c86a4', 0, 1], ['73758c', 0, 2], ['5a6973', 0, 3], ['425952', 0, 4], ['294d3a', 0, 5], ['103d21', 0, 6], ['73864a', 1, 4], ['8c926b', 1, 3], ['9c9e84', 1, 2], ['b5a6a4', 1, 1], ['d6db5b', 3, 3], ['a4aa63', 2, 3], ['c5be84', 2, 2], ['8c9e42', 2, 4]];
 
 nextStep = function(idx) {
-  var move, replace;
+  var move;
+  if (idx == null) idx = 0;
   if (idx === solution.length) {
     setTimeout(function() {
-      var replace;
       example1.reset();
-      replace = example1.render();
-      el.replaceWith(replace);
-      el = replace;
-      return $('#example-1').prepend(el);
+      return example1.render();
     }, 3000);
-    setTimeout(function() {
-      return nextStep(0);
-    }, 5000);
+    setTimeout(nextStep, 5000);
     return;
   }
   move = solution[idx];
   example1.set(move[0], move[1], move[2]);
-  replace = example1.render();
-  el.replaceWith(replace);
-  el = replace;
+  example1.render();
   return setTimeout(function() {
     return nextStep(idx + 1);
   }, 750);
 };
 
-setTimeout(function() {
-  return nextStep(0);
-}, 2000);
+setTimeout(nextStep, 2000);

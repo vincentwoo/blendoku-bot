@@ -82,7 +82,9 @@ class Blendoku
     @palette = _.shuffle @palette
 
   render: ->
-    $(_.template(@constructor.TEMPLATE, {@grid, @palette}))
+    replace = $(_.template(@constructor.TEMPLATE, {@grid, @palette}))
+    @$el.replaceWith(replace) if @$el
+    @$el = replace
 
 example1 = new Blendoku
   rows: 4
@@ -107,8 +109,7 @@ example1 = new Blendoku
   ]
   palette: ['8c9e42', 'c5be84', '9c9e84', '8c926b', 'a4aa63', 'b5a6a4', '5a6973', '8c86a4', '425952', '73758c', '103d21', '73864a', '294d3a', 'd6db5b']
 
-el = example1.render()
-$('#example-1').prepend el
+$('#example-1').prepend example1.render()
 
 solution = [
   ['8c86a4', 0, 1]
@@ -127,30 +128,21 @@ solution = [
   ['8c9e42', 2, 4]
 ]
 
-nextStep = (idx) ->
+nextStep = (idx = 0) ->
   if idx == solution.length
     setTimeout ->
       example1.reset()
-      replace = example1.render()
-      el.replaceWith replace
-      el = replace
-      $('#example-1').prepend el
+      example1.render()
     , 3000
-    setTimeout ->
-      nextStep 0
-    , 5000
+    setTimeout nextStep, 5000
     return
 
   move = solution[idx]
   example1.set move[0], move[1], move[2]
-  replace = example1.render()
-  el.replaceWith replace
-  el = replace
+  example1.render()
 
   setTimeout ->
     nextStep idx + 1
   , 750
 
-setTimeout ->
-  nextStep 0
-, 2000
+setTimeout nextStep, 2000
