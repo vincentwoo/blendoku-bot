@@ -6,7 +6,6 @@
     <title>Blendoku-Bot</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -14,7 +13,9 @@
   </head>
   <body>
     <div class="wrapper">
-      <aside id="example-1"></aside>
+      <aside id="example-1">
+        <caption>What solving a Blendoku level looks like.</caption>
+      </aside>
 
       <section>
         <h3>Playing with color.</h3>
@@ -28,24 +29,26 @@
 
         <p>
           We like it so much that we decided it would be pretty cool to blend code and color in a
-          fun challenge - playing Blendoku algorithmically.
+          fun challenge - playing Blendoku algorithmically. Check out the
+          <a href="https://www.youtube.com/watch?v=m6FITZ7p5FM">gameplay video</a> to get a sense
+          of what it's about.
         </p>
       </section>
 
-      <aside id="example-2"></aside>
-
       <section>
-        <h3>Rather Drive Stick?</h3>
+        <h3>The challenge.</h3>
 
-        <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+        <p>
+          The goal is essentially to write a bot that can solve Blendoku levels. Data describing the
+          levels will be provided to you in JSON, and you simply have to write a routine that can
+          decide where to put all the unassigned colors, and spit out a similar representation in
+          JSON.
+        </p>
 
-        <h3>Authors and Contributors</h3>
-
-        <p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-        <h3>Support or Contact</h3>
-
-        <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+        <p>
+          You'll also have a few sample levels with their solutions given. The example level on the
+          right will be a part of that sample set.
+        </p>
       </section>
     </div>
 
