@@ -2,7 +2,8 @@
 God help ye, all who enter. We write better code than this, generally.
 Checkout the github for the original coffeescript source.
 */
-var Blendoku, example1, nextStep, solution;
+var Blendoku, example1,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 _.mixin({
   eachSlice: function(obj, size, iterator, context) {
@@ -26,6 +27,7 @@ Blendoku = (function() {
     var cell, _i, _len, _ref,
       _this = this;
     this.rows = _arg.rows, this.cols = _arg.cols, this.cells = _arg.cells, this.palette = _arg.palette;
+    this.animateSolution = __bind(this.animateSolution, this);
     this.grid = _.times(this.rows, function() {
       return _.times(_this.cols, function() {
         return null;
@@ -76,6 +78,33 @@ Blendoku = (function() {
     return this.$el = replace;
   };
 
+  Blendoku.prototype.animateSolution = function(solution, repeat) {
+    var nextStep,
+      _this = this;
+    if (repeat == null) repeat = true;
+    nextStep = function(idx) {
+      var move;
+      if (idx == null) idx = 0;
+      if (idx === solution.length) {
+        if (repeat) {
+          setTimeout(function() {
+            _this.reset();
+            return _this.render();
+          }, 3000);
+          setTimeout(nextStep, 5000);
+        }
+        return;
+      }
+      move = solution[idx];
+      _this.set(move[0], move[1], move[2]);
+      _this.render();
+      return setTimeout(function() {
+        return nextStep(idx + 1);
+      }, 750);
+    };
+    return nextStep(0);
+  };
+
   return Blendoku;
 
 })();
@@ -89,25 +118,6 @@ example1 = new Blendoku({
 
 $('#example-1').prepend(example1.render());
 
-solution = [['8c86a4', 0, 1], ['73758c', 0, 2], ['5a6973', 0, 3], ['425952', 0, 4], ['294d3a', 0, 5], ['103d21', 0, 6], ['73864a', 1, 4], ['8c926b', 1, 3], ['9c9e84', 1, 2], ['b5a6a4', 1, 1], ['d6db5b', 3, 3], ['a4aa63', 2, 3], ['c5be84', 2, 2], ['8c9e42', 2, 4]];
-
-nextStep = function(idx) {
-  var move;
-  if (idx == null) idx = 0;
-  if (idx === solution.length) {
-    setTimeout(function() {
-      example1.reset();
-      return example1.render();
-    }, 3000);
-    setTimeout(nextStep, 5000);
-    return;
-  }
-  move = solution[idx];
-  example1.set(move[0], move[1], move[2]);
-  example1.render();
-  return setTimeout(function() {
-    return nextStep(idx + 1);
-  }, 750);
-};
-
-setTimeout(nextStep, 2000);
+setTimeout(function() {
+  return example1.animateSolution([['8c86a4', 0, 1], ['73758c', 0, 2], ['5a6973', 0, 3], ['425952', 0, 4], ['294d3a', 0, 5], ['103d21', 0, 6], ['73864a', 1, 4], ['8c926b', 1, 3], ['9c9e84', 1, 2], ['b5a6a4', 1, 1], ['d6db5b', 3, 3], ['a4aa63', 2, 3], ['c5be84', 2, 2], ['8c9e42', 2, 4]]);
+}, 2000);

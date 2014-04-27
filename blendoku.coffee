@@ -86,6 +86,27 @@ class Blendoku
     @$el.replaceWith(replace) if @$el
     @$el = replace
 
+  animateSolution: (solution, repeat = true) =>
+    nextStep = (idx = 0) =>
+      if idx == solution.length
+        if repeat
+          setTimeout =>
+            @reset()
+            @render()
+          , 3000
+          setTimeout nextStep, 5000
+        return
+
+      move = solution[idx]
+      @set move[0], move[1], move[2]
+      @render()
+
+      setTimeout ->
+        nextStep idx + 1
+      , 750
+
+    nextStep 0
+
 example1 = new Blendoku
   rows: 4
   cols: 7
@@ -111,38 +132,21 @@ example1 = new Blendoku
 
 $('#example-1').prepend example1.render()
 
-solution = [
-  ['8c86a4', 0, 1]
-  ['73758c', 0, 2]
-  ['5a6973', 0, 3]
-  ['425952', 0, 4]
-  ['294d3a', 0, 5]
-  ['103d21', 0, 6]
-  ['73864a', 1, 4]
-  ['8c926b', 1, 3]
-  ['9c9e84', 1, 2]
-  ['b5a6a4', 1, 1]
-  ['d6db5b', 3, 3]
-  ['a4aa63', 2, 3]
-  ['c5be84', 2, 2]
-  ['8c9e42', 2, 4]
-]
-
-nextStep = (idx = 0) ->
-  if idx == solution.length
-    setTimeout ->
-      example1.reset()
-      example1.render()
-    , 3000
-    setTimeout nextStep, 5000
-    return
-
-  move = solution[idx]
-  example1.set move[0], move[1], move[2]
-  example1.render()
-
-  setTimeout ->
-    nextStep idx + 1
-  , 750
-
-setTimeout nextStep, 2000
+setTimeout ->
+  example1.animateSolution [
+    ['8c86a4', 0, 1]
+    ['73758c', 0, 2]
+    ['5a6973', 0, 3]
+    ['425952', 0, 4]
+    ['294d3a', 0, 5]
+    ['103d21', 0, 6]
+    ['73864a', 1, 4]
+    ['8c926b', 1, 3]
+    ['9c9e84', 1, 2]
+    ['b5a6a4', 1, 1]
+    ['d6db5b', 3, 3]
+    ['a4aa63', 2, 3]
+    ['c5be84', 2, 2]
+    ['8c9e42', 2, 4]
+  ]
+, 2000
