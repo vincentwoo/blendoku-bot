@@ -51,10 +51,26 @@
           right will be a part of that sample set.
         </p>
       </section>
+
+      <aside id="blender"></aside>
+      <section>
+        <h3>The rules, or "Will it Blend?"</h3>
+
+        <p>
+          A Blendoku level is solved if every contiguous row or column is a linear color gradient.
+          A color is on a gradient between two start and end colors if it, for some value of x
+          between 0 and 1:
+        </p>
+        <pre>startColor * (1-x) + endColor * x = blendColor</pre>
+        <p>
+          Here, the multiply means "multiply each channel of the color separately." Here's a little
+          demonstration to show how the blending works.
+        </p>
+      </section>
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <script src="javascripts/blendoku.js"></script>
+    <script src="javascripts/index.js"></script>
   </body>
 </html>

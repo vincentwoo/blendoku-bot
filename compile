@@ -1,1 +1,1 @@
-coffee --watch --compile --bare -o javascripts *.coffee
+coffee --watch --compile --bare --join javascripts/index.js lib/*.coffee
