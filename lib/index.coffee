@@ -42,5 +42,3 @@ $ ->
       ['8c9e42', 2, 4]
     ]
   , 2000
-
-  blender = new Blender $('#blender'), 'ff0000', '00ff00'

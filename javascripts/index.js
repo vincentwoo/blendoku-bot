@@ -1,22 +1,9 @@
-var Blender, Blendoku,
-  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-Blender = (function() {
-
-  function Blender($el, start, end) {
-    this.$el = $el;
-    this.start = start;
-    this.end = end;
-  }
-
-  return Blender;
-
-})();
-
 /*
 God help ye, all who enter. We write better code than this, generally.
 Checkout the github for the original coffeescript source.
 */
+var Blendoku,
+  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 _.mixin({
   eachSlice: function(obj, size, iterator, context) {
@@ -123,7 +110,7 @@ Blendoku = (function() {
 })();
 
 $(function() {
-  var blender, example1;
+  var example1;
   example1 = new Blendoku({
     rows: 4,
     cols: 7,
@@ -131,8 +118,7 @@ $(function() {
     palette: ['8c9e42', 'c5be84', '9c9e84', '8c926b', 'a4aa63', 'b5a6a4', '5a6973', '8c86a4', '425952', '73758c', '103d21', '73864a', '294d3a', 'd6db5b']
   });
   $('#example-1').prepend(example1.render());
-  setTimeout(function() {
+  return setTimeout(function() {
     return example1.animateSolution([['8c86a4', 0, 1], ['73758c', 0, 2], ['5a6973', 0, 3], ['425952', 0, 4], ['294d3a', 0, 5], ['103d21', 0, 6], ['73864a', 1, 4], ['8c926b', 1, 3], ['9c9e84', 1, 2], ['b5a6a4', 1, 1], ['d6db5b', 3, 3], ['a4aa63', 2, 3], ['c5be84', 2, 2], ['8c9e42', 2, 4]]);
   }, 2000);
-  return blender = new Blender($('#blender'), 'ff0000', '00ff00');
 });

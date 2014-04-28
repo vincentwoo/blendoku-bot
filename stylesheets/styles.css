@@ -284,11 +284,6 @@ footer {
 
 table {
   border-spacing: 4px;
-  /*border: 1px solid red;*/
-}
-
-aside {
-  /*border: 1px solid blue;*/
 }
 
 td {
@@ -325,4 +320,12 @@ td .fui-lock {
   background: #ccc;
   border-radius: 4px;
   display: inline-block;
+}
+
+#blender table {
+  border-spacing: 10px;
+}
+
+#blender td {
+  border: 0;
 }
